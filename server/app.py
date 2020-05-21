@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -10,7 +10,7 @@ from datetime import datetime
 
 DEBUG = True
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="../client/dist", static_folder="../client/dist/static")
 app.config.from_object(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
@@ -28,7 +28,6 @@ def get_foods():
 
 
 def new_food(data):
-    print(data)
     new_food = Food(
         name=data["name"],
         quantity=data["quantity"],
@@ -37,14 +36,7 @@ def new_food(data):
     )
     db.session.add(new_food)
     db.session.commit()
-    validate_new_food = (
-        db.session.query(Food)
-        .filter_by(
-            name=data["name"], date=datetime.fromtimestamp(float(data["date"]) / 1000)
-        )
-        .first()
-    )
-    return jsonify(FoodSchema().dump(validate_new_food).data)
+    return jsonify(FoodSchema().dump(new_food).data)
 
 def get_food(id):
     this_food = Food.query.get(id)
@@ -59,7 +51,6 @@ def update_food(id, data):
         for key, value in data.items():
             setattr(this_food, key, value)
         db.session.commit()
-        this_food = Food.query.get(id)
         return jsonify(FoodSchema().dump(this_food).data)
     else:
         return {'code': '404'}
@@ -75,7 +66,7 @@ def delete_food(id):
 
 @app.route("/", methods=["GET"])
 def home():
-    return jsonify("Hello\n")
+    return render_template("index.html")
 
 
 @app.route("/foods", methods=["GET", "POST"])

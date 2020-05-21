@@ -24,7 +24,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 def get_foods():
     foods = Food.query.all()
-    return jsonify(FoodSchema(many=True).dump(foods).data)
+    return jsonify(FoodSchema(many=True).dump(foods))
 
 
 def new_food(data):
@@ -36,12 +36,12 @@ def new_food(data):
     )
     db.session.add(new_food)
     db.session.commit()
-    return jsonify(FoodSchema().dump(new_food).data)
+    return jsonify(FoodSchema().dump(new_food))
 
 def get_food(id):
     this_food = Food.query.get(id)
     if this_food:
-        return jsonify(FoodSchema().dump(this_food).data)
+        return jsonify(FoodSchema().dump(this_food))
     else:
         return {'code': '404'}
 
@@ -51,7 +51,7 @@ def update_food(id, data):
         for key, value in data.items():
             setattr(this_food, key, value)
         db.session.commit()
-        return jsonify(FoodSchema().dump(this_food).data)
+        return jsonify(FoodSchema().dump(this_food))
     else:
         return {'code': '404'}
 

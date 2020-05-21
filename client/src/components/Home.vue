@@ -11,8 +11,6 @@
 <script>
 import axios from 'axios'
 
-const basePath = 'http://localhost:5000/'
-
 export default {
   name: 'Home',
   data() {
@@ -25,7 +23,7 @@ export default {
   },
   methods: {
     createFood() {
-      const path = `${basePath}foods`
+      const path = '/foods'
       const payload = {
         name: this.name,
         quantity: this.quantity,

@@ -90,4 +90,4 @@ def food(id):
 
 
 if __name__ == "__main__":
-    app.run(port="$PORT")
+    app.run(port=os.environ.get(PORT))

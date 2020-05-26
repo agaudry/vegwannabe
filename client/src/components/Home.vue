@@ -5,6 +5,7 @@
     <div>reason: <textarea v-model="reason"></textarea></div>
     <button @click="createFood()">Submit</button>
     <div>{{ confirmation }}</div>
+    <router-link to="/display_foods" tag="button">Display all foods</router-link>
   </div>
 </template>
 

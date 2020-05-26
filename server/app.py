@@ -13,7 +13,7 @@ DEBUG = True
 app = Flask(__name__, template_folder="../client/dist", static_folder="../client/dist/static")
 app.config.from_object(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:veg101sh@localhost:5432/postgres"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -64,8 +64,9 @@ def delete_food(id):
     else:
         return {'code': '404'}
 
-@app.route("/", methods=["GET"])
-def home():
+@app.route('/', defaults={'path': ''}, methods=["GET"])
+@app.route("/<path>", methods=["GET"])
+def home(path):
     return render_template("index.html")
 
 

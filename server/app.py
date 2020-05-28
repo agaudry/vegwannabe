@@ -8,12 +8,8 @@ from flask_migrate import Migrate
 from datetime import datetime
 
 
-DEBUG = True
-
 app = Flask(__name__, template_folder="../client/dist", static_folder="../client/dist/static")
-app.config.from_object(__name__)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:veg101sh@localhost:5432/postgres"
+app.config.from_object('config.' + os.environ['SETTINGS'])
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 

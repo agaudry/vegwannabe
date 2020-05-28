@@ -1,1 +1,1 @@
-web: flask run --port=$PORT --host=0.0.0.0
+web: SETTINGS=ProdConf flask run --port=$PORT --host=0.0.0.0

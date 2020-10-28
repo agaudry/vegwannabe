@@ -1,10 +1,13 @@
 # vegwannabe
-an app to help you become vegan
+a tracker app to help you on your path to veganism
 
-****** TO DO
-POST and GET food
+****** TO DO ******
+- pages :
+    - about
+    - food summary
+    - profile/settings
 
+- user accounts system
+    - flask-login, flask-user, custom ?
 
-TO IMPLEMENT
-- Service worker to support offline requests
-- Animations and microinteractions
+- food-type autocomplete

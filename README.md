@@ -8,6 +8,6 @@ a tracker app to help you on your path to veganism
     - profile/settings
 
 - user accounts system
-    - flask-login, flask-user, custom ?
+    - flask-login + jwt
 
 - food-type autocomplete

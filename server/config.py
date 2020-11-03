@@ -7,6 +7,9 @@ class Config(object):
 
 class ProdConf(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SECRET_KEY = 'prodsecretkey'
 
 class DevConf(Config):
     DEBUG = True
+    SECRET_KEY = 'secretkey'
+

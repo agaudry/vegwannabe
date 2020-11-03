@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify, request, render_template
+from flask_jwt import JWT, jwt_required, current_identity
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -17,11 +18,20 @@ from models import *
 
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+def authenticate(username, password):
+    user = User.query.filter_by(username=username).scalar()
+    if user and user.check_password(password):
+        return user
+
+def identity(payload):
+    user_id = payload['identity']
+    return User.query.get(user_id)
+
+jwt = JWT(app, authenticate, identity)
 
 def get_foods():
     foods = Food.query.all()
     return jsonify(FoodSchema(many=True).dump(foods))
-
 
 def new_food(data):
     new_food = Food(
@@ -60,11 +70,16 @@ def delete_food(id):
     else:
         return {'code': '404'}
 
+
 @app.route('/', defaults={'path': ''}, methods=["GET"])
 @app.route("/<path>", methods=["GET"])
 def home(path):
     return render_template("index.html")
 
+@app.route('/protected')
+@jwt_required()
+def protected():
+    return '%s' % current_identity
 
 @app.route("/foods", methods=["GET", "POST"])
 def foods():

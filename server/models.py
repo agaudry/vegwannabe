@@ -1,6 +1,10 @@
-from app import db
 from marshmallow import Schema, fields
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+db = SQLAlchemy()
 
 
 class Food(db.Model):
@@ -32,6 +36,7 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
 
 class UserSchema(Schema):
     id = fields.Int()

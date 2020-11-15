@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 h-screen font-sans">
-    <NavBar />
+    <NavBar v-bind:displayLogin="true"/>
     <ul>
       <li v-for="food in foods" :key="food.id"> {{ food.name }} </li>
     </ul>
@@ -24,7 +24,9 @@ export default {
   methods: {
     getFoods() {
       const path = '/foods'
-      axios.get(path)
+      const cookie = document.cookie
+      const headers = { headers: { 'Authorization': `JWT ${cookie.split('=')[1]}` } }
+      axios.get(path, headers)
         .then((res) => {
           this.foods = res.data
         })

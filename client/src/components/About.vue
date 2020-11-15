@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 h-screen font-sans">
-    <NavBar />
+    <NavBar v-bind:displayLogin="true"/>
     <h1>About</h1>
   </div>
 </template>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/Home.vue'
 import Foods from '../components/Foods.vue'
 import About from '../components/About.vue'
+import Login from '../components/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const router = new VueRouter({
       path: '/about',
       name: 'about',
       component: About,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
     }
   ],
 });

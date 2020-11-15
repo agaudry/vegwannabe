@@ -1,14 +1,14 @@
 <template>
   <div class="p-4 h-screen font-sans">
-    <NavBar />
+    <NavBar v-bind:displayLogin="true"/>
     <div class="px-4 py-20 text-light">
       <span class="font-bold text-lg">I ate</span>
       <div class="grid grid-cols-12 gap-4 mt-2">
         <div class="col-span-9 border-b border-pop">
-          <input class="appearance-none bg-pop bg-opacity-25 text-pop focus:outline-none w-full" placeholder="Beef" type="text" v-model="name">
+          <input class="appearance-none bg-pop bg-opacity-25 text-pop text-md focus:outline-none w-full" placeholder="Beef" type="text" v-model="name">
         </div>
         <div class="col-span-2 border-b border-pop">
-          <input class="appearance-none bg-pop bg-opacity-25 text-pop focus:outline-none w-full" placeholder="100" type="text" v-model="quantity">
+          <input class="appearance-none bg-pop bg-opacity-25 text-pop text-md focus:outline-none w-full" placeholder="100" type="text" v-model="quantity">
         </div>
         <div class="col-span-1 font-bold text-lg">g</div>
       </div>

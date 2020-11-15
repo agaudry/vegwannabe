@@ -40,7 +40,9 @@
 		"rules": {
 			"semi": "off",
 			"comma-dangle": "off",
-			"max-len": "off"
+			"max-len": "off",
+			"quote-props": 1,
+			"prefer-destructuring":"warn"
 		}
 	},
 	"browserslist": [

@@ -8,6 +8,7 @@ a tracker app to help you on your path to veganism
     - profile/settings
 
 - user accounts system
-    - flask-login + jwt
+    - signup
+    - check jwt-extended to revoke tokens when user logs out
 
 - food-type autocomplete

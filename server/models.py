@@ -14,6 +14,8 @@ class Food(db.Model):
     quantity = db.Column(db.Integer)
     date = db.Column(db.DateTime)
     reason = db.Column(db.String(255))
+    user_id = db.Column(Integer, ForeignKey("user.id"))
+    user = relationship("User", back_populates="foods")
 
 
 class FoodSchema(Schema):
@@ -30,6 +32,7 @@ class User(db.Model):
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(64), unique=True, nullable=False)
     password = db.Column(db.String(512), nullable=False)
+    foods = relationship("Food", back_populates="user")
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

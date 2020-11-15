@@ -7,7 +7,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:veg101sh@localhost:5432/postgres"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_AUTH_URL_RULE = "/auth/login"
-    JWT_EXPIRATION_DELTA = timedelta(days=15)
+    JWT_EXPIRATION_DELTA = timedelta(days=14)
     JWT_AUTH_USERNAME_KEY = "email"
 
 

@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, render_template, request
+from flask_jwt import JWT, jwt_required, current_identity
 from datetime import datetime
 from server.models import db
 from server.models import Food, FoodSchema
@@ -54,8 +55,10 @@ def delete_food(id):
 
 
 @foods_bp.route("/", methods=["GET", "POST"])
+@jwt_required()
 def list_foods():
     if request.method == "GET":
+        print("this is {}'s foods!".format(current_identity.username))
         return get_foods()
     elif request.method == "POST":
         data = request.get_json()
